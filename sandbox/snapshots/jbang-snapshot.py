@@ -45,7 +45,7 @@ def getSources(scriptFilename):
             if len(line) > len(token):
                 if line[0:len(token)] == token:
                     return line.split()[1:]
-    return
+    return []
 
 def main():
     # Get the main script filename
