@@ -26,7 +26,7 @@ public class SnapshotManager {
                 outF.write(hashValue);
             }
 
-            System.out.println("    " + filepath + " --> " + outputFilepath);
+            System.out.println("    " + filepath + " sha1 " + outputFilepath);
 
         } catch (FileNotFoundException e) {
             System.out.println("Error: File not found at " + filepath);
@@ -98,7 +98,7 @@ public class SnapshotManager {
         System.out.println("   " + mainScriptFilename);
         for (String file : getSources(mainScriptFilename)) {
             String filename;
-            if (srcDir.length() > 0) {
+            if (srcDir != null && srcDir.length() > 0) {
                 filename = srcDir + "/" + file;
             } else {
                 filename = file;
@@ -110,7 +110,7 @@ public class SnapshotManager {
         // Copy files
         System.out.println("\nSnapshot started.");
         for (String srcFile : srcFiles) {
-            System.out.println("    " + srcFile + " --> " + destDir + "/");
+            System.out.println("    " + srcFile + " copy " + destDir + "/");
             try {
                 Files.copy(Paths.get(srcFile), Paths.get(destDir + "/" + new File(srcFile).getName()), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
@@ -122,7 +122,7 @@ public class SnapshotManager {
 
         String srcFile = destDir + '/' + "00index.json";
         String dstFile = srcFile + ".sha1";
-        System.out.println("    " + srcFile);
+        System.out.println("    " + srcFile + " create");
         try (BufferedWriter idxFile = new BufferedWriter(new FileWriter(srcFile))) {
             idxFile.write(indexFileText.replace("__DESC__", description).replace("__TIMESTAMP__", dateTimestamp));
         } catch (IOException e) {
