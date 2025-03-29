@@ -113,7 +113,7 @@ public class SnapshotManager {
         for (String srcFile : srcFiles) {
             System.out.println("    " + srcFile + " copy " + destDir);
             try {
-                Files.copy(Paths.get(srcFile), Paths.get(destDir, srcFile), StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(Paths.get(srcFile), Paths.get(destDir, Paths.get(srcFile).getFileName().toString()), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -130,14 +130,32 @@ public class SnapshotManager {
             e.printStackTrace();
         }
         sha1HashFile(srcFile, dstFile);
-        System.out.println("\nSnapshot done.");
 
+        System.out.println("\nSnapshot files.");
+        String indexFilename = "";
         File destDir_fh = new File(destDir);
         File[] destDirList = destDir_fh.listFiles();
         Arrays.sort(destDirList);
         for (File dirname : destDirList) {
-            System.out.println("   " + Paths.get(destDir, dirname.getName()));
+            String filename = Paths.get(destDir, dirname.getName()).toString();
+            if (filename.endsWith("00index.json")) {
+                indexFilename = filename;
+            }
+            System.out.println("   " + filename);
         }
+
+        // Display index file
+        System.out.println("\nSnapshot index file.");
+        System.out.println("   " + indexFilename);
+        try (BufferedReader file = new BufferedReader(new FileReader(indexFilename))) {
+            String line;
+            while ((line = file.readLine()) != null) {
+                System.out.println("   " + line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("\nSnapshot done.");
     }
 
 }
