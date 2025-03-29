@@ -10,6 +10,7 @@ import java.nio.file.*;
 import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Arrays;
 
 public class SnapshotManager {
 
@@ -99,7 +100,7 @@ public class SnapshotManager {
         for (String file : getSources(mainScriptFilename)) {
             String filename;
             if (srcDir != null && srcDir.length() > 0) {
-                filename = srcDir + "/" + file;
+                filename = Paths.get(srcDir, file).toString();
             } else {
                 filename = file;
             }
@@ -110,9 +111,9 @@ public class SnapshotManager {
         // Copy files
         System.out.println("\nSnapshot started.");
         for (String srcFile : srcFiles) {
-            System.out.println("    " + srcFile + " copy " + destDir + "/");
+            System.out.println("    " + srcFile + " copy " + destDir);
             try {
-                Files.copy(Paths.get(srcFile), Paths.get(destDir + "/" + new File(srcFile).getName()), StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(Paths.get(srcFile), Paths.get(destDir, srcFile), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -120,7 +121,7 @@ public class SnapshotManager {
             sha1HashFile(srcFile, sha1DestFile);
         }
 
-        String srcFile = destDir + '/' + "00index.json";
+        String srcFile = Paths.get(destDir, "00index.json").toString();
         String dstFile = srcFile + ".sha1";
         System.out.println("    " + srcFile + " create");
         try (BufferedWriter idxFile = new BufferedWriter(new FileWriter(srcFile))) {
@@ -130,6 +131,13 @@ public class SnapshotManager {
         }
         sha1HashFile(srcFile, dstFile);
         System.out.println("\nSnapshot done.");
+
+        File destDir_fh = new File(destDir);
+        File[] destDirList = destDir_fh.listFiles();
+        Arrays.sort(destDirList);
+        for (File dirname : destDirList) {
+            System.out.println("   " + Paths.get(destDir, dirname.getName()));
+        }
     }
 
 }
