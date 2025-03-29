@@ -84,7 +84,7 @@ public class SnapshotManager {
                 intSet.add(Integer.parseInt(dirname.getName()));
             }
         }
-        int snapshotId = intSet.isEmpty() ? 0 : Collections.max(intSet) + 1;
+        int snapshotId = intSet.isEmpty() ? 1 : Collections.max(intSet) + 1;
 
         // Create the snapshot folder
         String destDir = mainSnapshotDirname + "/" + snapshotId;
