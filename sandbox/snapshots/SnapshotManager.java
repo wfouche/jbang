@@ -65,7 +65,7 @@ public class SnapshotManager {
         String description = args[1];
         String dateTimestamp = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").format(new Date());
 
-        System.out.println("Source script   : " + mainScriptFilename);
+        System.out.println("\nSource script   : " + mainScriptFilename);
         System.out.println("Description     : " + description);
 
         String mainSnapshotDirname = mainScriptFilename.substring(0, mainScriptFilename.lastIndexOf('.'));
