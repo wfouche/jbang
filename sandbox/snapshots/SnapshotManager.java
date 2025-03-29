@@ -22,13 +22,10 @@ public class SnapshotManager {
             byte[] fileBytes = Files.readAllBytes(Paths.get(filepath));
             sha1.update(fileBytes);
             String hashValue = bytesToHex(sha1.digest());
-
             try (BufferedWriter outF = new BufferedWriter(new FileWriter(outputFilepath))) {
                 outF.write(hashValue);
             }
-
             System.out.println("    " + filepath + " sha1 " + outputFilepath);
-
         } catch (FileNotFoundException e) {
             System.out.println("Error: File not found at " + filepath);
         } catch (Exception e) {
