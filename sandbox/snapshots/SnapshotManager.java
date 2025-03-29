@@ -51,6 +51,14 @@ public class SnapshotManager {
         return sources;
     }
 
+    private static String bytesToHex(byte[] bytes) {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : bytes) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
+    }
+
     public static void main(String[] args) {
         String mainScriptFilename = args[0];
         String srcDir = new File(mainScriptFilename).getParent();
@@ -80,21 +88,27 @@ public class SnapshotManager {
 
         // Create the snapshot folder
         String destDir = mainSnapshotDirname + "/" + snapshotId;
-        System.out.println("Snapshot folder : " + destDir);
+        System.out.println("\nSnapshot folder : " + destDir);
         new File(destDir).mkdir();
 
         // Copy files
-        System.out.println("Snapshot started.");
-        List<String> srcFiles = new ArrayList<>();
+        System.out.println("\nSources files;");
+        List<String> srcFiles = new LinkedList<>();
         srcFiles.add(mainScriptFilename);
+        System.out.println("   " + mainScriptFilename);
         for (String file : getSources(mainScriptFilename)) {
+            String filename;
             if (srcDir.length() > 0) {
-                srcFiles.add(srcDir + "/" + file);
+                filename = srcDir + "/" + file;
             } else {
-                srcFiles.add(file);
+                filename = file;
             }
+            srcFiles.add(filename);
+            System.out.println("   " + filename);
         }
 
+        // Copy files
+        System.out.println("\nSnapshot started.");
         for (String srcFile : srcFiles) {
             System.out.println("    " + srcFile + " --> " + destDir + "/");
             try {
@@ -115,14 +129,7 @@ public class SnapshotManager {
             e.printStackTrace();
         }
         sha1HashFile(srcFile, dstFile);
-        System.out.println("Snapshot done.");
+        System.out.println("\nSnapshot done.");
     }
 
-    private static String bytesToHex(byte[] bytes) {
-        StringBuilder sb = new StringBuilder();
-        for (byte b : bytes) {
-            sb.append(String.format("%02x", b));
-        }
-        return sb.toString();
-    }
 }
