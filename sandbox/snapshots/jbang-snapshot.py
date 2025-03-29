@@ -50,6 +50,7 @@ def getSources(scriptFilename):
 def main():
     # Get the main script filename
     mainScriptFilename = sys.argv[1]
+    srcDir = os.path.dirname(mainScriptFilename)
     description = sys.argv[2]
     dateTimestamp = output_date = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
 
@@ -58,20 +59,15 @@ def main():
     print("Description     : " + description)
 
     # Name of directory the mainScriptFilename resides in
-    mainScriptDirname = os.path.splitext(mainScriptFilename)[0]
+    mainSnapshotDirname = os.path.splitext(mainScriptFilename)[0]
 
-    # Get the dirname to be used to store the snapshots in
-    #print(mainScriptFilename)
-    if not os.path.isfile(mainScriptFilename):
-        sys.exit(1)
 
     # Create the snapshot folder if required
-    #print(mainScriptDirname)
-    if not os.path.isdir(mainScriptDirname):
-        os.mkdir(mainScriptDirname)
+    if not os.path.isdir(mainSnapshotDirname):
+        os.mkdir(mainSnapshotDirname)
 
     # Calculate the next snapshotId to  be used
-    dir_list = os.listdir(mainScriptDirname)
+    dir_list = os.listdir(mainSnapshotDirname)
     intSet = {0}
     for dirname in dir_list:
         vnum = int(dirname)
@@ -80,7 +76,7 @@ def main():
     #print(snapshotId)
 
     # Create the snapshot folder
-    destDir = mainScriptDirname + "/" + str(snapshotId)
+    destDir = mainSnapshotDirname + "/" + str(snapshotId)
     print("Snapshot folder : " + destDir)
     os.mkdir(destDir)
 
@@ -88,7 +84,11 @@ def main():
     print("Snapshot started.")
     srcFiles = [mainScriptFilename]
     for file in getSources(mainScriptFilename):
-        srcFiles.append(os.path.dirname(mainScriptFilename) + '/' + file)
+        if len(srcDir) > 0:
+            srcFiles.append(srcDir + '/' + file)
+        else:
+            srcFiles.append(file)
+
     for srcFile in srcFiles:
         print("    " + srcFile + " --> " + destDir + "/")
         shutil.copy(srcFile, destDir)
