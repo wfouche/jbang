@@ -34,6 +34,11 @@ import dev.jbang.util.Util;
 
 public class Catalog {
 
+	public Catalog() {
+        this.baseRef = null;
+        this.description = null;
+    }
+
 	public static class SkipEmptyMapSerializer<K, V> implements JsonSerializer<Map<K, V>> {
 		@Override
 		public JsonElement serialize(Map<K, V> src, Type typeOfSrc, JsonSerializationContext context) {
