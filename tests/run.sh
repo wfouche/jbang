@@ -17,5 +17,6 @@ echo ""
 echo "Camel tests"
 echo ""
 $JBANG run camel version
+$JBANG run -Djbang.app.version=4.17.0 camel version
 $JBANG run camel:4.17.0 version
 
