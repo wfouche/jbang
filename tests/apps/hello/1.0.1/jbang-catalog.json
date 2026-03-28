@@ -1,0 +1,10 @@
+{
+    "aliases": {
+        "hello": {
+            "script-ref": "src/hello.java",
+            "properties": {
+                "app.version": "1.0.1"
+            }
+        }
+    }
+}

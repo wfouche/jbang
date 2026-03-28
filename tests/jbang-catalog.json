@@ -1,0 +1,21 @@
+{
+  "aliases" : {
+    "junit" : {
+      "script-ref" : "org.junit.platform:junit-platform-console-standalone:6.0.3",
+      "description" : "Launch the JUnit Platform from the console"
+    },
+    "cli" : {
+      "script-ref" : "org.junit.platform:junit-platform-console-standalone:6.0.3",
+      "description" : "Launch the JUnit Platform from the console"
+    },
+    "h": {
+      "script-ref": "./hello/${jbang.app.version:1.0.0}/hello.java"
+    },
+    "hw": {
+      "script-ref": "hello@./apps/hello/1.0.0/jbang-catalog.json"
+    },
+    "hw2": {
+      "script-ref": "hello@./apps/hello/${jbang.app.version:1.0.0}/jbang-catalog.json"
+    }
+  }
+}
