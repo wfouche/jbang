@@ -16,6 +16,9 @@
     },
     "hw2": {
       "script-ref": "hello@./apps/hello/${jbang.app.version:1.0.0}/jbang-catalog.json"
+    },
+    "camel": {
+      "script-ref": "./CamelJBang.java"
     }
   }
 }
