@@ -29,10 +29,10 @@
       "dependencies": [
         "org.apache.camel:camel-bom:4.18.0@pom"
       ],
-      //"main": "org.apache.camel.dsl.jbang.core.commands.CamelJBangMain"
+      "main": "org.apache.camel.dsl.jbang.core.commands.CamelJBangMain"
     },
-    "c": {
-      "script-ref": "./camel/${jbang.app.version:4.17.0}/CamelJBang.java"
+    "camel9": {
+      "script-ref": "./camel/${jbang.app.version:4.18.1}/CamelJBang.java"
     }
   }
 }

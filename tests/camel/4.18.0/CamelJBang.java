@@ -19,9 +19,9 @@
 
 //JAVA 21+
 //REPOS central=https://repo1.maven.org/maven2,apache-snapshot=https://repository.apache.org/content/groups/snapshots/
-//DEPS org.apache.camel:camel-bom:${jbang.app.version:4.17.0}@pom
-//DEPS org.apache.camel:camel-jbang-core:${jbang.app.version:4.17.0}
-//DEPS org.apache.camel.kamelets:camel-kamelets:${jbang.app.version:4.17.0}
+//DEPS org.apache.camel:camel-bom:4.18.0@pom
+//DEPS org.apache.camel:camel-jbang-core:4.18.0
+//DEPS org.apache.camel.kamelets:camel-kamelets:4.18.0
 
 package main;
 
