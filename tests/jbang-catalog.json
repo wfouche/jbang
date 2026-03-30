@@ -1,12 +1,12 @@
 {
   "aliases" : {
-    "junit" : {
-      "script-ref" : "org.junit.platform:junit-platform-console-standalone:6.0.3",
-      "description" : "Launch the JUnit Platform from the console"
+    "junit": {
+      "script-ref": "org.junit.platform:junit-platform-console-standalone:6.0.3",
+      "description": "Launch the JUnit Platform from the console"
     },
-    "cli" : {
-      "script-ref" : "org.junit.platform:junit-platform-console-standalone:6.0.3",
-      "description" : "Launch the JUnit Platform from the console"
+    "cli": {
+      "script-ref": "org.junit.platform:junit-platform-console-standalone:6.0.3",
+      "description": "Launch the JUnit Platform from the console"
     },
     "h": {
       "script-ref": "./hello/${jbang.app.version:1.0.0}/hello.java"
@@ -19,6 +19,20 @@
     },
     "camel": {
       "script-ref": "./CamelJBang.java"
+    },
+    "camel4": {
+      "script-ref": "org.apache.camel:camel-jbang-core:4.18.0",
+      "repositories": [
+        "central=https://repo1.maven.org/maven2",
+        "apache-snapshot=https://repository.apache.org/content/groups/snapshots/"
+      ],
+      "dependencies": [
+        "org.apache.camel:camel-bom:4.18.0@pom"
+      ],
+      //"main": "org.apache.camel.dsl.jbang.core.commands.CamelJBangMain"
+    },
+    "c": {
+      "script-ref": "./camel/${jbang.app.version:4.17.0}/CamelJBang.java"
     }
   }
 }
